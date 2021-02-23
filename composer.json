@@ -1,7 +1,7 @@
 {
     "name": "stormsq/developer-service",   
-    "description": "",
-    "type": "package",
+    "description": "My Pattern of laravel project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
@@ -9,6 +9,9 @@
             "email": "liao91826@outlook.com"
         }
     ],
+    "require": {
+        "laravel/framework": "^5.0|^6.0|^7.0"
+    },
     "autoload": {
         "psr-4": {
             "STORMSQ\\Developer\\": "src/"
