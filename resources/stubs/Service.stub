@@ -1,0 +1,11 @@
+<?php
+namespace {{namespace}};
+use STORMSQ\Developer\ServiceBuilder;
+
+class {{servicename}} extends ServiceBuilder{
+
+    public function __construct()
+    {
+        //
+    }
+}

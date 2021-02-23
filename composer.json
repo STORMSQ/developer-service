@@ -1,0 +1,32 @@
+{
+    "name": "stormsq/developer-service",   
+    "description": "",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sten, Liao",
+            "email": "liao91826@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "STORMSQ\\Developer\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "STORMSQ\\Developer\\DeveloperServiceProvider"
+            ],
+            "aliases": {
+                "ServiceBuilder": "STORMSQ\\Developer\\ServiceBuilder"
+            }
+        }
+    }
+}
