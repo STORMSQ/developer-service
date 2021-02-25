@@ -29,8 +29,8 @@ class ServiceBuilder{
      */
     private function isModel($modelName)
     {
-        $path = (config('developer.model.placepath'))?($this->checkRightPath(config('developer.model.placepath')).DIRECTORY_SEPARATOR):null; 
-        $isModel = app_path().DIRECTORY_SEPARATOR.$path.$modelName.'.php';
+        $path = (config('developer.model.placepath'))?($this->removeSpecificFlag(config('developer.model.placepath')).DIRECTORY_SEPARATOR):null; 
+        $isModel = app_path().DIRECTORY_SEPARATOR.$this->removeSpecificFlag($path,false).$modelName.'.php';
         if(!file_exists($isModel)){
            return false;
         }else{
@@ -46,7 +46,7 @@ class ServiceBuilder{
     private function modelSetting($modelName)
     {
         $ModelFactory = new ModelFactory;
-        $config = $this->checkRightPath(config("developer.model.placepath"));
+        $config = $this->removeSpecificFlag($this->removeSpecificFlag(config("developer.model.placepath")),false);
         
         $path = implode("\\",explode(DIRECTORY_SEPARATOR,$config));
 
@@ -56,10 +56,15 @@ class ServiceBuilder{
         return $model;
     } 
 
-    private function checkRightPath($string,$sign="/")
+    private function removeSpecificFlag($string,$fromRight=true,$sign="/")
     {      
-        return (strrpos($string,$sign)==strlen($string)-1)?$this->checkRightPath(substr($string,0,strlen($string)-1)):$string;
+        if($fromRight){
+             return (strrpos($string,$sign)==strlen($string)-1)?$this->removeSpecificFlag(substr($string,0,strlen($string)-1)):$string;
+        }else{
+            return (stripos($string,$sign)===0)?$this->removeSpecificFlag(substr($string,1,strlen($string)),false):$string;
+        }
     }
+    
 	/**
 	 * 檢查模型是否有該欄位
 	 *
