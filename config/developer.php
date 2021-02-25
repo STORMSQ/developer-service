@@ -1,4 +1,16 @@
 <?php
 return [
-    'model_subpath'=>env('DEVELOPER_MODEL_SUBPATH',''),
+    'model'=>[
+        'placepath'=>null,
+    ],
+    'presenter'=>[
+        'icon'=>[
+            'useitag'=>true,
+            'default'=>'fa fa-sort',
+            'asc'=>'fa fa-sort-asc',
+            'desc'=>'fa fa-sort-desc',
+        ],
+
+       
+    ],
 ];

@@ -1,0 +1,11 @@
+<?php
+namespace {{namespace}};
+use STORMSQ\Developer\PresenterBuilder;
+
+class {{presentername}} extends Presenter{
+
+    public function __construct()
+    {
+        //
+    }
+}

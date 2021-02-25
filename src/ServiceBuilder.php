@@ -29,7 +29,8 @@ class ServiceBuilder{
      */
     private function isModel($modelName)
     {
-        $isModel = app_path().DIRECTORY_SEPARATOR.config('developer.model_subpath').DIRECTORY_SEPARATOR.$modelName.'.php';
+        $path = (config('developer.model.placepath'))?($this->checkRightPath(config('developer.model.placepath')).DIRECTORY_SEPARATOR):null; 
+        $isModel = app_path().DIRECTORY_SEPARATOR.$path.$modelName.'.php';
         if(!file_exists($isModel)){
            return false;
         }else{
@@ -45,15 +46,20 @@ class ServiceBuilder{
     private function modelSetting($modelName)
     {
         $ModelFactory = new ModelFactory;
-        $path = explode(DIRECTORY_SEPARATOR,config("developer.model_subpath"));
-        $location = (count($path)-1==null && config("developer.model_subpath")!=null)?(implode("\\",$path).'\\'):implode("\\",$path);
+        $config = $this->checkRightPath(config("developer.model.placepath"));
+        
+        $path = implode("\\",explode(DIRECTORY_SEPARATOR,$config));
 
-        $modelName = 'App\\'.$location.$modelName;
+        $modelName = 'App\\'.(($path)?$path."\\":null).$modelName;
         $ModelFactory::bind($modelName);
         $model =  app('Model');  
         return $model;
     } 
 
+    private function checkRightPath($string,$sign="/")
+    {      
+        return (strrpos($string,$sign)==strlen($string)-1)?$this->checkRightPath(substr($string,0,strlen($string)-1)):$string;
+    }
 	/**
 	 * 檢查模型是否有該欄位
 	 *

@@ -4,6 +4,7 @@ namespace STORMSQ\Developer;
 
 use Illuminate\Support\ServiceProvider;
 use STORMSQ\Developer\Commands\GenerateService;
+use STORMSQ\Developer\Commands\GeneratePresenter;
 class DeveloperServiceProvider extends ServiceProvider
 {
     
@@ -11,9 +12,10 @@ class DeveloperServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../config/developer.php' => config_path('developer.php'),
-        ],'config');
+        ],'developer');
         $this->commands([
             GenerateService::class,
+            GeneratePresenter::class,
         ]);
     
     }

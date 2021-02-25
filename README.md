@@ -6,7 +6,7 @@
 
 這個主要是方便我快速調用Laravel Eloquent Model。因為習慣集中所有Eloquent Model，所以封裝了一些方法方便使用
 
-## 安裝
+# 安裝
 
 ```bash
 composer require stormsq/developer-service
@@ -31,13 +31,33 @@ php artisan vendor:publish
 
 你會在config底下看到一個developer.php
 
-## 設定
+# 設定
 
 config/developer.php
 
-目前裡面只有一個選項，model_subpath是設定Eloquent Model的位置，預設是app底下
+目前裡面有兩組可調整參數組，分別是Model與Presenter
 
-## 使用方法
+Model只有一個placepath，是設定Eloquent Model的位置，預設是app底下
+
+Presenter裡有以下：
+
+```php
+[
+    'icon'=>[
+        'useitag'=>true, //是否使用<i>標籤，如果設定為false則以下排序設定將失效
+        'default'=>'fa fa-sort', //沒有排序時的i tag class參數
+        'asc'=>'fa fa-sort-asc', // 順序時i tag class的參數
+        'desc'=>'fa fa-sort-desc', //倒序時i tag class的參數
+    ]
+]
+
+```
+
+
+
+# 使用方法
+
+## Service
 
 產生一個Service
 
@@ -70,3 +90,35 @@ $this->getModel("Eloquent Model名稱") //User
 ```
 
 如果Eloquent Model是存在且正確的，則這個方法會返回該Eloquent Model
+
+## Presenter
+
+presenter是一個搭配blade使用的開發概念，將不好維護的blade語句獨立到presenter中，使用時再注入到blade
+
+產生一個Presenter
+
+```bash
+php artisan developer:make:presenter "Presenter名稱" //Presenters/Admin/DemoPresenter
+```
+
+基本路徑與Service一樣，在app底下
+
+```php
+<?php
+namespace App\Prestenters;
+use STORMSQ\Developer\PresenterBuilder;
+
+class DemoPresenter extends Presenter{
+
+    public function __construct()
+    {
+        //
+    }
+}
+```
+
+presenter可用方法
+
+getTableHeader(array)
+
+參數array 格式為 '排序名'=>'欄位名稱'
