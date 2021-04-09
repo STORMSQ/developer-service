@@ -50,7 +50,7 @@ class GenerateService extends Command
         }
         $serviceName = $path[count($path)-1];
         $filepath = substr(implode(DIRECTORY_SEPARATOR,$path),0,strrpos(implode(DIRECTORY_SEPARATOR,$path),DIRECTORY_SEPARATOR));
-        $namespace = 'App\\'.str_replace("/","\\",$filepath);
+        $namespace = rtrim('App\\'.str_replace("/","\\",$filepath),"\\");
        
         if(!is_dir(app_path($filepath))){
             mkdir(app_path($filepath),0755,true);
