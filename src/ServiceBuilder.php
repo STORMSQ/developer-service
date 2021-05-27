@@ -1,10 +1,42 @@
 <?php
 namespace STORMSQ\Developer;
 use STORMSQ\Developer\Factory\ModelFactory;
-//use Schema;
+use Schema;
 class ServiceBuilder{
 
     
+    /**
+	 * 創建一個空的請求
+	 *
+	 * @param array $data 參數陣列
+	 * @return request 返回一個request實例
+	 */
+	public function getEmptyRequest(array $data=[])
+	{
+		$request = Request::capture();
+        
+        foreach($request->all() as $key=>$row){
+            $request->request->remove($key);
+        }
+		$array = [];
+		foreach($data as $key=>$row){
+			$array[$key]=  $row;
+		}
+		$request->request->add($array);
+		return $request;
+    }
+    /**
+     * 分頁處理
+     *
+     * @param  $builder 查詢語句
+     * @param  int $num 一頁幾筆
+     * @param  boolean $usePaginate
+     * @return void
+     */
+    protected function resultSet($builder,$num=10,$usePaginate=true)
+    {
+        return ($usePaginate)?$builder->paginate($num):$builder->get();
+    }
     /**
      * 綁定Model
      *
@@ -72,8 +104,8 @@ class ServiceBuilder{
 	 * @param [type] $columnName 欄位名稱
 	 * @return boolean 是/否
 	 */
-    /*public static function hasColumn($model,$columnName)
+    public function hasColumn($model,$columnName)
     {
         return Schema::hasColumn($model->getTable(), $columnName);
-    }*/
+    }
 }

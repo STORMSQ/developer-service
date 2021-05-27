@@ -5,6 +5,7 @@ namespace STORMSQ\Developer;
 use Illuminate\Support\ServiceProvider;
 use STORMSQ\Developer\Commands\GenerateService;
 use STORMSQ\Developer\Commands\GeneratePresenter;
+use File;
 class DeveloperServiceProvider extends ServiceProvider
 {
     
@@ -17,6 +18,9 @@ class DeveloperServiceProvider extends ServiceProvider
             GenerateService::class,
             GeneratePresenter::class,
         ]);
+        if (File::exists(__DIR__ . '/../helper/helpers.php')) {
+            require __DIR__ . '/../helper/helpers.php';
+        }
     
     }
 

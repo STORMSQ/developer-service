@@ -2,7 +2,7 @@
 namespace {{namespace}};
 use STORMSQ\Developer\PresenterBuilder;
 
-class {{presentername}} extends Presenter{
+class {{presentername}} extends PresenterBuilder{
 
     public function __construct()
     {
