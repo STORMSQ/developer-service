@@ -52,7 +52,19 @@ class ServiceBuilder{
         }else{
             return null;
         }
+    }    
+	/**
+	 * 檢查模型是否有該欄位
+	 *
+	 * @param [type] $model 模型名稱
+	 * @param [type] $columnName 欄位名稱
+	 * @return boolean 是/否
+	 */
+    public function hasColumn($model,$columnName)
+    {
+        return Schema::hasColumn($model->getTable(), $columnName);
     }
+
     /**
      * 私用方法，處理getModel中判斷是否為Model
      *
@@ -96,16 +108,5 @@ class ServiceBuilder{
             return (stripos($string,$sign)===0)?$this->removeSpecificFlag(substr($string,1,strlen($string)),false):$string;
         }
     }
-    
-	/**
-	 * 檢查模型是否有該欄位
-	 *
-	 * @param [type] $model 模型名稱
-	 * @param [type] $columnName 欄位名稱
-	 * @return boolean 是/否
-	 */
-    public function hasColumn($model,$columnName)
-    {
-        return Schema::hasColumn($model->getTable(), $columnName);
-    }
+
 }
