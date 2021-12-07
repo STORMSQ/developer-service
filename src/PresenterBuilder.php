@@ -51,7 +51,7 @@ class PresenterBuilder{
         
         return $this->map($request->all());
     }
-    private function map(array $data,$preKey=null)
+    public function map(array $data,$preKey=null)
     {
         $map = collect($data)->map(function($item,$key)use($preKey){
             if(is_array($item)){

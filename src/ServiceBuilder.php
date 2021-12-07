@@ -100,6 +100,14 @@ class ServiceBuilder{
         return $model;
     } 
 
+    /**
+     * 私有方法，將特定路徑轉換成反斜線"\"
+     *
+     * @param [type] $string 路徑
+     * @param boolean $fromRight 是否從右邊開始
+     * @param string $sign 路徑標誌，預設是/ 
+     * @return string 轉換後的路徑
+     */
     private function removeSpecificFlag($string,$fromRight=true,$sign="/")
     {      
         if($fromRight){
