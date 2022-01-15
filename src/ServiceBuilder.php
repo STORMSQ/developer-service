@@ -29,11 +29,11 @@ class ServiceBuilder{
      * 分頁處理
      *
      * @param  $builder 查詢語句
-     * @param  int $num 一頁幾筆
      * @param  boolean $usePaginate
+     * @param  int $num 一頁幾筆
      * @return void
      */
-    protected function resultSet($builder,$num=10,$usePaginate=true)
+    protected function resultSet($builder,$usePaginate=true,$num=10)
     {
         return ($usePaginate)?$builder->paginate($num):$builder->get();
     }
