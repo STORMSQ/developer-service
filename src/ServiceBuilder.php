@@ -2,6 +2,7 @@
 namespace STORMSQ\Developer;
 use STORMSQ\Developer\Factory\ModelFactory;
 use Schema;
+use Illuminate\Http\Request;
 class ServiceBuilder{
 
     
