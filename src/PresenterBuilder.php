@@ -13,7 +13,7 @@ class PresenterBuilder{
             $key = preg_replace('/(.+)\[[0-9]+\]/Ux', '\\1', $key);
             if(strpos($query,'by=asc')!=false){
                 if(Request::get('sort')==$key){
-                    $icon = config('developer.presenter.icon.asc');
+                    $icon = config('developer.presenter.icon.desc');
                 }else{
                     $icon = config('developer.presenter.icon.default');
                 }
@@ -22,7 +22,7 @@ class PresenterBuilder{
                 $html.='<a href="'.$href.'" '.((config('developer.presenter.icon.linkclass'))?'class='.$icon:null).'>'.((config('developer.presenter.icon.useitag'))?'<i class="'.$icon.'"></i>':null).$row.'</a>';	              
             }elseif(strpos($query,'by=desc')!=false){
                 if(Request::get('sort')==$key){
-                    $icon = config('developer.presenter.icon.desc');
+                    $icon = config('developer.presenter.icon.asc');
                 }else{
                     $icon = config('developer.presenter.icon.default');
                 }
