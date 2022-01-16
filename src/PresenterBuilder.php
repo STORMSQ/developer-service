@@ -19,7 +19,7 @@ class PresenterBuilder{
                 }
                 $href= $current.str_ireplace('asc','desc',preg_replace('/(sort=).*(&)/Ux','sort='.$key.'\\2',$query));
 
-                $html.='<a href="'.$href.'">'.((config('developer.presenter.icon.useitag'))?'<i class="'.$icon.'"></i>':null).$row.'</a>';	              
+                $html.='<a href="'.$href.'" '.((config('developer.presenter.icon.linkclass'))?'class='.$icon:null).'>'.((config('developer.presenter.icon.useitag'))?'<i class="'.$icon.'"></i>':null).$row.'</a>';	              
             }elseif(strpos($query,'by=desc')!=false){
                 if(Request::get('sort')==$key){
                     $icon = config('developer.presenter.icon.desc');
@@ -27,11 +27,11 @@ class PresenterBuilder{
                     $icon = config('developer.presenter.icon.default');
                 }
                 $href= $current.str_ireplace('asc','desc',preg_replace('/(sort=).*(&)/Ux','sort='.$key.'\\2',$query));
-                $html.='<a href="'.$href.'" >'.((config('developer.presenter.icon.useitag'))?'<i class="'.$icon.'"></i>':null).$row.'</a>';	              
+                $html.='<a href="'.$href.'" '.((config('developer.presenter.icon.linkclass'))?'class='.$icon:null).'>'.((config('developer.presenter.icon.useitag'))?'<i class="'.$icon.'"></i>':null).$row.'</a>';	              
             }else{
                 $icon = config('developer.presenter.icon.default');
                 $href= $current.str_ireplace('asc','desc',preg_replace('/(sort=).*(&)/Ux','sort='.$key.'\\2',$query));
-                $html.='<a href="'.$href.'&sort='.$key.'&by=desc" >'.((config('developer.presenter.icon.useitag'))?'<i class="'.$icon.'"></i>':null).$row.'</a>';	              
+                $html.='<a href="'.$href.'&sort='.$key.'&by=desc" '.((config('developer.presenter.icon.linkclass'))?'class='.$icon:null).'>'.((config('developer.presenter.icon.useitag'))?'<i class="'.$icon.'"></i>':null).$row.'</a>';	              
             }   
             $html.='</th>';
 
