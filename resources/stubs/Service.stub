@@ -1,6 +1,6 @@
 <?php
 namespace {{namespace}};
-use STORMSQ\Developer\ServiceBuilder;
+use STORMSQ\DeveloperService\ServiceBuilder;
 
 class {{servicename}} extends ServiceBuilder{
 
@@ -8,4 +8,5 @@ class {{servicename}} extends ServiceBuilder{
     {
         //
     }
+
 }

@@ -14,7 +14,7 @@
     },
     "autoload": {
         "psr-4": {
-            "STORMSQ\\Developer\\": "src/"
+            "STORMSQ\\DeveloperService\\": "src/"
         }
     },
     "minimum-stability": "dev",
@@ -25,10 +25,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "STORMSQ\\Developer\\DeveloperServiceProvider"
+                "STORMSQ\\DeveloperService\\DeveloperServiceProvider"
             ],
             "aliases": {
-                "ServiceBuilder": "STORMSQ\\Developer\\ServiceBuilder"
+                "ServiceBuilder": "STORMSQ\\DeveloperService\\ServiceBuilder"
             }
         }
     }

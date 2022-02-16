@@ -1,6 +1,6 @@
 <?php
 
-namespace STORMSQ\Developer\Commands;
+namespace STORMSQ\DeveloperService\Commands;
 
 use Illuminate\Console\Command;
 
@@ -11,7 +11,7 @@ class GenerateService extends Command
      *
      * @var string
      */
-    protected $signature = 'developer:make:service {path}';
+    protected $signature = 'developer:make:service {path} {--withDefault=}';
 
     /**
      * The console command description.
@@ -37,6 +37,7 @@ class GenerateService extends Command
      */
     public function handle()
     {
+
         $path = explode(DIRECTORY_SEPARATOR,$this->argument('path'));
         if($path[count($path)-1]==null){
             array_pop($path);
@@ -48,6 +49,8 @@ class GenerateService extends Command
             $this->error("檔案已經存在!");
             exit;
         }
+        $model = $this->option('withDefault');
+        //$modelLower = strtolower($model);
         $serviceName = $path[count($path)-1];
         $filepath = substr(implode(DIRECTORY_SEPARATOR,$path),0,strrpos(implode(DIRECTORY_SEPARATOR,$path),DIRECTORY_SEPARATOR));
         $namespace = rtrim('App\\'.str_replace("/","\\",$filepath),"\\");
@@ -55,7 +58,7 @@ class GenerateService extends Command
         if(!is_dir(app_path($filepath))){
             mkdir(app_path($filepath),0755,true);
         }
-        $this->createService(['namespace'=>$namespace,'serviceName'=>$serviceName,'filepath'=>$filepath]);  
+        $this->createService(['namespace'=>$namespace,'serviceName'=>$serviceName,'filepath'=>$filepath,'model'=>$model],(($model!=null)?true:false));  
 
         $this->info("Service 已成功建立!");
 
@@ -65,16 +68,21 @@ class GenerateService extends Command
     {
         return file_get_contents(__DIR__.'/../../resources/stubs'.DIRECTORY_SEPARATOR."Service.stub");
     }
-    protected function createService(array $fillData)
+    protected function getStubWithDefault()
+    {
+        return file_get_contents(__DIR__.'/../../resources/stubs'.DIRECTORY_SEPARATOR."ServiceWithDefault.stub");
+    }
+    protected function createService(array $fillData,bool $withDefault)
     {
         $modelTemplate = str_replace(
-            ['{{namespace}}','{{servicename}}'],
-            [$fillData['namespace'],$fillData['serviceName']],
-            $this->getStub()
+            ['{{namespace}}','{{servicename}}','{{model}}','{{modellower}}'],
+            [$fillData['namespace'],$fillData['serviceName'],$fillData['model'],strtolower($fillData['model'])],
+            (($withDefault)?$this->getStubWithDefault():$this->getStub())
         );
 
         file_put_contents(app_path($fillData['filepath'].DIRECTORY_SEPARATOR.$fillData['serviceName'].".php"), $modelTemplate);
     }
 
+    
 
 }

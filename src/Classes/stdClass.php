@@ -1,5 +1,5 @@
 <?php
-namespace STORMSQ\Developer\Classes;
+namespace STORMSQ\DeveloperService\Classes;
 use Exception;
 class stdClass {
 

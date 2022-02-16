@@ -1,10 +1,9 @@
 <?php
 
-namespace STORMSQ\Developer;
+namespace STORMSQ\DeveloperService;
 
 use Illuminate\Support\ServiceProvider;
-use STORMSQ\Developer\Commands\GenerateService;
-use STORMSQ\Developer\Commands\GeneratePresenter;
+use STORMSQ\DeveloperService\Commands\GenerateService;
 use File;
 class DeveloperServiceProvider extends ServiceProvider
 {
@@ -12,11 +11,10 @@ class DeveloperServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../config/developer.php' => config_path('developer.php'),
-        ],'developer');
+            __DIR__.'/../config/developer-service.php' => config_path('developer-service.php'),
+        ],'developer-service');
         $this->commands([
             GenerateService::class,
-            GeneratePresenter::class,
         ]);
         if (File::exists(__DIR__ . '/../helper/helpers.php')) {
             require __DIR__ . '/../helper/helpers.php';

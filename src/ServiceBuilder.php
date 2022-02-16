@@ -1,6 +1,6 @@
 <?php
-namespace STORMSQ\Developer;
-use STORMSQ\Developer\Factory\ModelFactory;
+namespace STORMSQ\DeveloperService;
+use STORMSQ\DeveloperService\Factory\ModelFactory;
 use Schema;
 use Illuminate\Http\Request;
 class ServiceBuilder{
@@ -74,7 +74,7 @@ class ServiceBuilder{
      */
     private function isModel($modelName)
     {
-        $path = (config('developer.model.placepath'))?($this->removeSpecificFlag(config('developer.model.placepath')).DIRECTORY_SEPARATOR):null; 
+        $path = (config('developer-service.model.placepath'))?($this->removeSpecificFlag(config('developer-service.model.placepath')).DIRECTORY_SEPARATOR):null; 
         $isModel = app_path().DIRECTORY_SEPARATOR.$this->removeSpecificFlag($path,false).$modelName.'.php';
         if(!file_exists($isModel)){
            return false;
@@ -91,7 +91,7 @@ class ServiceBuilder{
     private function modelSetting($modelName)
     {
         $ModelFactory = new ModelFactory;
-        $config = $this->removeSpecificFlag($this->removeSpecificFlag(config("developer.model.placepath")),false);
+        $config = $this->removeSpecificFlag($this->removeSpecificFlag(config("developer-service.model.placepath")),false);
         
         $path = implode("\\",explode(DIRECTORY_SEPARATOR,$config));
 

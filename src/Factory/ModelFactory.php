@@ -1,5 +1,5 @@
 <?php
-namespace STORMSQ\Developer\Factory;
+namespace STORMSQ\DeveloperService\Factory;
 use Illuminate\Support\Facades\App;
 
 class ModelFactory{

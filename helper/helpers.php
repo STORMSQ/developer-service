@@ -54,7 +54,7 @@ if (! function_exists('getStdClass')) {
      */
     function getStdClass()
     {
-        return new STORMSQ\Developer\Classes\stdClass;
+        return new STORMSQ\DeveloperService\Classes\stdClass;
     }
 }
 
