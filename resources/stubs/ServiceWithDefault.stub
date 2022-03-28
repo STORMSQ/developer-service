@@ -1,0 +1,33 @@
+<?php
+namespace {{namespace}};
+use STORMSQ\DeveloperService\ServiceBuilder;
+
+class {{servicename}} extends ServiceBuilder{
+
+    public function __construct()
+    {
+        //
+    }
+
+    public function get{{model}}($request=null,$usePaginate=true)
+    {
+        if($request==null){
+            $request = $this->getEmptyRequest();
+        }
+        ${{modellower}} = $this->getModel('{{model}}');
+
+        if($request->has('sort')){
+
+            ${{modellower}} = ${{modellower}}->orderBy($request->sort,$request->by);
+        
+        }
+        return $this->resultSet(${{modellower}},$usePaginate);
+
+    }
+    
+    public function get{{model}}Detail(${{modellower}}_id)
+    {
+        return  $this->getModel('{{model}}')->find(${{modellower}}_id);
+    }
+    
+}
