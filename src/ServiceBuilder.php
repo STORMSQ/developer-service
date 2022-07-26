@@ -34,8 +34,11 @@ class ServiceBuilder{
      * @param  int $num 一頁幾筆
      * @return void
      */
-    protected function resultSet($builder,$usePaginate=true,$num=10)
+    protected function resultSet($builder,$usePaginate=true,$num=0)
     {
+        if($num==0){
+            $num = config('developer-service.service.defaultaginatenum');
+        }
         return ($usePaginate)?$builder->paginate($num):$builder->get();
     }
     /**
